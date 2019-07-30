@@ -34,7 +34,7 @@ And to see more about mongoDB architecture: <br>
 > https://docs.mongodb.com/manual/
 
 <br>
-Worker is consumer / or simply a WORKER in other words for rabbitMQ
+Worker is consumer / or WORKER in other words for rabbitMQ
 <br> [ _pleas see rabbitmq docs for better understanding typical rabbit concept_ ].
 <br> 
 This small service is responsible for loading date from queue and preparing to save in mongoDB, after all insert JSON date to cloud
@@ -50,3 +50,5 @@ Next open new terminal in root directory and type command: <br>
 > cd worker/ <br>
 > yarn install <br>
 > nodemon --exec ts-node worker.ts 
+
+Remand to insert your .env file to both directory, or change url line responsible for connection with AMQP cloud, and MongoDB.

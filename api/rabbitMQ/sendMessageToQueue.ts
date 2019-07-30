@@ -1,7 +1,7 @@
 import connection from './connect';
 
 connection.on('connect', () => console.log(' [AMQP] CONNECTED!'));
-connection.on('disconnect', (err) => console.log(' [AMQP] DISCONNECTED' + err.stack))
+connection.on('disconnect', (err) => console.log(' [AMQP] DISCONNECTED' + err.stack));
 
 const channelWrapper = connection.createChannel({ 
   json: true,
