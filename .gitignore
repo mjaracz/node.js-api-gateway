@@ -1,0 +1,17 @@
+.env
+
+# node_modules
+/api/node_modules/
+/worker/node_modules/
+
+# config file
+/api/configJWT.json
+
+
+yarn.lock
+yarn-error.log
+/api/yarn.lock
+/worker/yarn.lock
+
+# IDE configurations
+.idea/
