@@ -7,7 +7,6 @@
 # config file
 /api/configJWT.json
 
-
 yarn.lock
 yarn-error.log
 /api/yarn.lock
@@ -15,3 +14,7 @@ yarn-error.log
 
 # IDE configurations
 .idea/
+
+#package-lock.json
+/worker/package-lock.json
+/api/package-lock.json
