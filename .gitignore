@@ -1,18 +1,15 @@
-.env
-
 # node_modules
 /api/node_modules/
 /worker/node_modules/
 
-# config file
-/api/configJWT.json
+# env file 
+/api/.env
+/worker/.env
 
-yarn.lock
-yarn-error.log
 /api/yarn.lock
 /worker/yarn.lock
 
-# IDE configurations
+# webstorm IDE configurations
 .idea/
 
 #package-lock.json
