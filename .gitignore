@@ -13,5 +13,5 @@
 .idea/
 
 #package-lock.json
-/worker/package-lock.json
 /api/package-lock.json
+/worker/package-lock.json
