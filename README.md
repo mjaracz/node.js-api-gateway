@@ -82,5 +82,6 @@ which will ensure reliable request support regardless of traffic volume.
 >
 > https://www.npmjs.com/package/amqp-connection-manager
 >
+> https://www.amqp.org/
+> 
 > https://docs.mongodb.com/
->
