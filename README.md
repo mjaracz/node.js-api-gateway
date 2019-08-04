@@ -24,6 +24,7 @@
 >
 <h5>Remember to type the dot char on the end of line</h6>
 <h5>Next run container built for us before. Just typing</h6>
+
 > docker run -p 8080:8080 -d  "your hub.docker username"/nodejs_portfolio-api
 >
 <h5> Running docker with -d flag means detached mood and -p flag means port and is depends on you</h5>
