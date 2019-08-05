@@ -86,3 +86,6 @@ which will ensure reliable request support regardless of traffic volume.
 > https://www.amqp.org/
 > 
 > https://docs.mongodb.com/
+
+<h5>You may wonder to see how looks our root endpoint. I deploy project in my  VPS on the Arube Cloud. Is available for url below:</h5>
+> http://212.237.0.26:49160/api/stories/all
