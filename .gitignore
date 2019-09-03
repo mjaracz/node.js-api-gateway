@@ -3,8 +3,7 @@
 /worker/node_modules/
 
 # env file 
-/api/.env
-/worker/.env
+
 
 /api/yarn.lock
 /worker/yarn.lock
