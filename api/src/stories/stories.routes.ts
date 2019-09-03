@@ -1,30 +1,23 @@
 import sendMessageToQueue from '../rabbitMQ/sendMessageToQueue';
 import findById from '../mongodb/findById';
 import findAll from '../mongodb/findAll';
-import {
-  asyncHandler,
-  responseOf,
-  asString,
-  asObject,
-  sanitize,
-  asNumber
-} from '@restless/restless';
 import deleteOne from '../mongodb/deleteOne';
+import reqStoryValidate from '../helpers/reqStoryValidate';
 
 import {Router} from 'express';
 const route = Router();
 
-route.get('/stories/all', async (req, res) => {
-  await findAll('documents')
+route.get('/stories/all', (req, res) => {
+  findAll('documents')
     .then(data => res.json(data))
     .catch(err => {
-      res.statusMessage = "Internal Server Error";
+      res.statusMessage = err.message + 'Internal Server Error';
       res.sendStatus(500);
     })
 });
 
-route.get('/story/:id', async (req, res) => {
-  await findById('documents', Number(req.params.id))
+route.get('/story/:id', (req, res) => {
+  findById('documents', Number(req.params.id))
     .then(data => res.json(data))
     .catch(err => {
       res.statusMessage = 'ID without Rang';
@@ -32,44 +25,44 @@ route.get('/story/:id', async (req, res) => {
     });
 });
 
-route.post('/story/new', asyncHandler(
-  sanitize({
-    body: asObject({
-      id: asNumber,
-      username: asString,
-      title: asString,
-      body: asString
+route.post('/story/new', (req, res) => {
+  const { body } = req;
+  reqStoryValidate(body)
+    .then(story => {
+      sendMessageToQueue('post_stories', story);
+      res.json(story);
     })
-  }),
-   reqData => {
-   sendMessageToQueue('new.json.stories', reqData);
-   return responseOf(reqData)
-  }
-));
-
-route.put('/story/update/:id', asyncHandler(
-  sanitize({
-    id: asNumber,
-    body: asObject({
-      username: asString,
-      title: asString,
-      body: asString
+    .catch((errorMessage: string) => {
+      res
+        .status(400)
+        .send(errorMessage)
+        .statusMessage = errorMessage;
     })
-  }),
-  reqData => {
-    sendMessageToQueue('update.json.stories', reqData);
-    return responseOf(reqData)
-  }
-));
+});
 
-route.delete(`/story/delete/:id`, async (req, res) => {
-  await deleteOne('documents', Number(req.params.id))
+route.put('/story/update/:id', (req, res) => {
+  const { body } = req;
+  reqStoryValidate(body)
+    .then(story => {
+      sendMessageToQueue('post_stories', story);
+      res.json(story);
+    })
+    .catch((errorMessage: string) => {
+      res
+        .status(400)
+        .send(errorMessage)
+        .statusMessage = errorMessage;
+    })
+});
+
+route.delete(`/story/delete/:id`, (req, res) => {
+  deleteOne('documents', Number(req.params.id))
     .then(data => res.json(data))
     .catch(err => {
-      res.statusMessage = "Internal Server Error";
-      res.sendStatus(500);
+      res
+        .status(500)
+        .statusMessage = err.message + 'Internal Server Error';
     });
-
 });
 
 export default route;

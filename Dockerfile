@@ -22,7 +22,7 @@ RUN npm install -g ts-node
 ADD api /opt/api
 WORKDIR /opt/api
 
-# install projects deps and bundled our project to js extension
+# install projects deps and bundled our project to js
 RUN yarn install
 RUN tsc -p src/
 

@@ -1,8 +1,9 @@
 import storiesRoutes from './stories/stories.routes';
 import dotenv from 'dotenv';
 
-const express = require('express');
-const parser = require('body-parser');
+import express from 'express';
+import parser from 'body-parser';
+import loginRoutes from './login/login.routes';
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/api', storiesRoutes);
+app.use('/api', loginRoutes);
 app.use((req, res) => {
   res.send(JSON.stringify({'message': 'route not handler'}));
   res.status(404);
